@@ -1,5 +1,6 @@
 var models  = require('../models');
 var express = require('express');
+var validator = require('validator');
 var router = express.Router();
 
 /* GET users listing. */
@@ -8,7 +9,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/create', function(req, res) {
-  if ((req.body.username).trim()) {
+  if (validator.isAlphanumeric(req.body.username)) {
     models.User.create({
       username: req.body.username
     }).then(function () {
@@ -31,7 +32,7 @@ router.get('/:userid/destroy', function(req, res) {
 });
 
 router.post('/:userid/tasks/create', function(req, res) {
-  if ((req.body.title).trim()) {
+  if (validator.isAlphanumeric(req.body.title)) {
     models.Task.create({
         title: req.body.title,
         UserId: req.params.userid
