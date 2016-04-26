@@ -1,58 +1,20 @@
-var models  = require('../models');
 var express = require('express');
 var validator = require('validator');
 var router = express.Router();
 
-/* GET users listing. */
+var users = require('../controllers/users');
+var tasks = require('../controllers/tasks');
+
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.post('/create', function(req, res) {
-  if (validator.isAlphanumeric(req.body.username)) {
-    models.User.create({
-      username: req.body.username
-    }).then(function () {
-      res.redirect('/');
-    });
+router.post('/create', users.createUser);
 
-    } else {
-      res.redirect('/');
-  }
-});
+router.get('/:userid/destroy', users.deleteUser);
 
-router.get('/:userid/destroy', function(req, res) {
-  models.User.destroy({
-    where: {
-      id: req.params.userid
-    }
-  }).then(function() {
-    res.redirect('/');
-  });
-});
+router.post('/:userid/tasks/create', tasks.createTask);
 
-router.post('/:userid/tasks/create', function(req, res) {
-  if (validator.isAlphanumeric(req.body.title)) {
-    models.Task.create({
-        title: req.body.title,
-        UserId: req.params.userid
-    }).then(function() {
-      res.redirect('/');
-    });
-  } else {
-    res.redirect('/');
-  }
-});
-
-router.get('/:userid/tasks/:taskid/destroy', function(req, res) {
-  models.Task.destroy({
-    where: {
-      id: req.params.taskid
-    }
-  }).then(function(success, err) {
-    if (err) console.log(err);
-    res.redirect('/');
-  });
-});
+router.get('/:userid/tasks/:taskid/destroy', tasks.deleteTask);
 
 module.exports = router;

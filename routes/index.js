@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
     include: [ models.Task ]
   }).then(function(users) {
     res.render('index', {
-      title: 'Express',
+      title: 'Todo MVC',
       users: users
     });
   });

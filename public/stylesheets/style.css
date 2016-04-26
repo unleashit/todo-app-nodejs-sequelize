@@ -1,8 +1,19 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+  font: 16px Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.user {
+  padding-top: 20px;
+}
+
+.tasks {
+  padding-bottom: 16px;
+}
+.user-name, .task-title {
+  padding-right: 12px;
 }
