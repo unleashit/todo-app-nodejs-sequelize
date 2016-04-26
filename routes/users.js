@@ -8,11 +8,16 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/create', function(req, res) {
-  models.User.create({
-    username: req.body.username
-  }).then(function() {
-    res.redirect('/');
-  });
+  if ((req.body.username).trim()) {
+    models.User.create({
+      username: req.body.username
+    }).then(function () {
+      res.redirect('/');
+    });
+
+    } else {
+      res.redirect('/');
+  }
 });
 
 router.get('/:userid/destroy', function(req, res) {
@@ -26,13 +31,16 @@ router.get('/:userid/destroy', function(req, res) {
 });
 
 router.post('/:userid/tasks/create', function(req, res) {
-  console.log('dinosaur');
-  models.Task.create({
-      title: req.body.title,
-      UserId: req.params.userid
-  }).then(function() {
+  if ((req.body.title).trim()) {
+    models.Task.create({
+        title: req.body.title,
+        UserId: req.params.userid
+    }).then(function() {
+      res.redirect('/');
+    });
+  } else {
     res.redirect('/');
-  });
+  }
 });
 
 router.get('/:userid/tasks/:taskid/destroy', function(req, res) {
