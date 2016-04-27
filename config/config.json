@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "root",
+    "username": "unleashit",
     "password": null,
-    "database": "sequelize_cli_test",
+    "database": "c9",
     "host": "localhost",
     "dialect": "mysql",
     "charset": "utf8",
